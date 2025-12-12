@@ -11,10 +11,8 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* \
 
 WORKDIR /var/www/html/
 
-# Copy template ZIP from host → avoid HTTPS problems in CentOS 7
 COPY photogenic.zip /var/www/html/
 
-# Unzip and move content
 RUN unzip photogenic.zip \
  && cp -rvf photogenic/* /var/www/html/ \
  && rm -rf photogenic photogenic.zip
