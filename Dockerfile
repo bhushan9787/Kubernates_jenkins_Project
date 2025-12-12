@@ -11,13 +11,11 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* \
 
 WORKDIR /var/www/html/
 
-# Copy photogenic.zip from Jenkins workspace to container
-COPY photogenic.zip /var/www/html/
+# Copy ZIP from Jenkins to container
+COPY photogenic.zip .
 
-# Extract directly (no photogenic/ folder)
-RUN unzip photogenic.zip \
- && cp -rvf * /var/www/html/ \
- && rm -rf photogenic.zip
+# Extract ZIP directly in current folder
+RUN unzip photogenic.zip && rm -f photogenic.zip
 
 EXPOSE 80
 
