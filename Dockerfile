@@ -22,5 +22,5 @@ RUN rm -rf photogenic photogenic.zip
 # Start Apache in foreground
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 
-EXPOSE 80 443
+EXPOSE 80
 
