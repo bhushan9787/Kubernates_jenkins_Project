@@ -11,17 +11,13 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* \
 
 WORKDIR /var/www/html/
 
-# Download template using CURL because wget fails SSL on CentOS7
-RUN curl -k -L -o photogenic.zip https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip
+# Copy template ZIP from host → avoid HTTPS problems in CentOS 7
+COPY photogenic.zip /var/www/html/
 
-# Unzip template
-RUN unzip photogenic.zip
-
-# Copy website files
-RUN cp -rvf photogenic/* /var/www/html/
-
-# Cleanup
-RUN rm -rf photogenic photogenic.zip
+# Unzip and move content
+RUN unzip photogenic.zip \
+ && cp -rvf photogenic/* /var/www/html/ \
+ && rm -rf photogenic photogenic.zip
 
 EXPOSE 80
 
