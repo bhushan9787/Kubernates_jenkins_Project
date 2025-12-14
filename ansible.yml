@@ -1,0 +1,8 @@
+- name: Deploy webapp to Kubernetes
+  hosts: node
+  become: true
+
+  tasks:
+    - name: Apply Kubernetes Deployment and Service
+      command: kubectl apply -f /home/ubuntu/webapp.yml
+
